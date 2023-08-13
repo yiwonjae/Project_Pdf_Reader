@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -26,7 +27,21 @@ namespace Project_Pdf_Reader
         {
             InitializeComponent();
 
+
+            // 화면 캡처 비활성화
+            DisableHardwareCapture();
+
+
             this.DataContext = new MainFrameView(new MainFrameViewModel());
+        }
+
+        private void DisableHardwareCapture()
+        {
+            HwndSource hwndSource = PresentationSource.FromVisual(this) as HwndSource;
+            if (hwndSource != null)
+            {
+                hwndSource.CompositionTarget.RenderMode = RenderMode.SoftwareOnly;
+            }
         }
     }
 }
