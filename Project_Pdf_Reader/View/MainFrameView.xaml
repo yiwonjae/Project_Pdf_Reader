@@ -13,6 +13,18 @@
     
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <DockPanel>
 
 
@@ -21,15 +33,40 @@
         </StackPanel>
         
         
-        <StackPanel Width="200" DockPanel.Dock="Right">
-            
+        <StackPanel Width="300" DockPanel.Dock="Right" Margin="10">
+
+            <ItemsControl ItemsSource="{Binding Annotations, UpdateSourceTrigger=PropertyChanged}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="Black" Margin="10">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding CommandMouseDown}" CommandParameter="{Binding ElementName=pdfViewer}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            
+                            <Grid Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding context}"/>
+                            </Grid>
+                        </Border>
+                        
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
         </StackPanel>
 
         <StackPanel Height="100" DockPanel.Dock="Top">
             
         </StackPanel>
 
-        <PdfViewer:PdfViewerControl>
+        <PdfViewer:PdfViewerControl x:Name="pdfViewer">
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextSelectionCompleted">
