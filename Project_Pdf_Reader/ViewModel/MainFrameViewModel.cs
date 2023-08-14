@@ -38,12 +38,16 @@ namespace Project_Pdf_Reader.ViewModel
 
         #endregion
 
+
+        #region 생성자
+
         public MainFrameViewModel()
         {
         
         
         }
 
+        #endregion
 
 
         #region Event

@@ -17,11 +17,11 @@ namespace Project_Pdf_Reader.Model
     {
         
         
-        public String context { get; set; }
+        public String context        { get; set; }
 
-        public int page { get; set; }
+        public int page              { get; set; }
 
-        public Rectangle contextBase { get;set; }
+        public Rectangle contextBase { get; set; }
 
         
         
